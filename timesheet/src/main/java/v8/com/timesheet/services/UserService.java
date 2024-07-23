@@ -2,8 +2,10 @@ package v8.com.timesheet.services;
 
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import v8.com.timesheet.dtos.UserDTO;
+import v8.com.timesheet.expection.ValidationException;
 import v8.com.timesheet.mappers.UserMapper;
 import v8.com.timesheet.models.UserModel;
 import v8.com.timesheet.repositories.AcessProfileRepository;
@@ -25,7 +27,8 @@ public class UserService {
         this.positionRepository = positionRepository;
     }
 
-    public UserDTO saveUser(UserDTO userDTO) {
+    public void saveUser(UserDTO userDTO) {
+
         UserModel user = userMapper.userDTOToUserModel(userDTO);
         user.setAcessProfile(acessProfileRepository.findById(userDTO.acessProfileId()).get());
         user.setPosition(positionRepository.findById(userDTO.positionId()).get());
@@ -33,6 +36,5 @@ public class UserService {
 
         userRepository.save(user);
 
-        return userDTO;
     }
 }

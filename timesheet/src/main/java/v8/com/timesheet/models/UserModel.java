@@ -29,7 +29,7 @@ public class UserModel implements Serializable {
     @Column(nullable = false)
     private String password;
     @Column
-    private Seniority seniority;
+    private String seniority;
     @Column
     private String phone;
     @Column(nullable = false)
